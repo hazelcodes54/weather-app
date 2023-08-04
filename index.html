@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="app.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;1,200;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <video autoplay muted loop id="bgvideo">
+    <source src="icons/ghiblistudio.mp4" type="video/mp4">
+  </video>
+  
+  <div class="container">
+    <div class="app-title">
+      <p>Weather Info</p>
+      <input
+      id='search'
+      type='text'
+      placeholder="Enter a city"
+      autocomplete="off"/>
+
+      <div class="location-icon">
+    <img src="icons/pin.png" alt="">
+  </div>
+</div>
+
+<div class="notification"></div>
+<div class="weather-container">
+      <div class="weather-icon">
+        <img src="icons/cloud.png" alt="">
+      </div>
+
+
+    <div class="temperature-value">
+      <p>-°<span>C</span></p>
+    </div>
+    <div class="temperature-description">
+      <p>-</p>
+    </div>
+    <div class="location">
+      <p>-</p>
+    </div>
+</div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
