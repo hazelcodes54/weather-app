@@ -391,7 +391,7 @@ function renderHourly(data) {
       const img = document.createElement('img'); img.src = `https://openweathermap.org/img/wn/${h.weather[0].icon}@2x.png`; img.alt = h.weather[0].description || '';
       iconWrap.appendChild(img);
     }
-    const temp = document.createElement('div'); temp.className = 'hour-temp'; temp.textContent = (toDisplayTemp(h.temp) ?? '--') + (unit === 'metric' ? '°C' : '°F');
+    const temp = document.createElement('div'); temp.className = 'hour-temp'; temp.textContent = (toDisplayTemp(h.main.temp) ?? '--') + (unit === 'metric' ? '°C' : '°F');
     div.appendChild(time); div.appendChild(iconWrap); div.appendChild(temp);
     container.appendChild(div);
   });
