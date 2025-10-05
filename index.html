@@ -8,45 +8,152 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;1,200;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  
-  <video autoplay muted loop id="bgvideo">
-    <source src="icons/ghiblistudio.mp4" type="video/mp4">
-  </video>
-  
-  <div class="container">
-    <div class="app-title">
-      <p>Weather Info</p>
-      <input
-      id='search'
-      type='text'
-      placeholder="Enter a city"
-      autocomplete="off"/>
 
-      <div class="location-icon">
-    <img src="icons/pin.png" alt="">
-  </div>
-</div>
+  <main class="app">
+    <!-- Top section with weather and forecast cards -->
+    <div class="cards-container">
+      <div class="weather-card" role="region" aria-label="Current weather">
+        <header class="card-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <h1>Weather</h1>
+            <div class="unit-toggle" aria-label="Temperature units">
+              <button id="unitC" class="unit active" aria-pressed="true">°C</button>
+              <button id="unitF" class="unit" aria-pressed="false">°F</button>
+            </div>
+          </div>
+        <div class="search-group">
+          <input id="search" type="text" placeholder="Enter city or ZIP" autocomplete="off" aria-label="Search city" />
+          <button id="searchBtn" aria-label="Search">🔍</button>
+        </div>
+      </header>
 
-<div class="notification"></div>
-<div class="weather-container">
-      <div class="weather-icon">
-        <img src="icons/cloud.png" alt="">
+      <div class="notification" aria-live="polite"></div>
+
+      <section class="card-main">
+        <div class="weather-icon" aria-hidden="true">
+          <img src="icons/cloud.png" alt="weather icon">
+        </div>
+
+        <div class="main-info">
+          <div class="temperature-value"><p>--<span>°C</span></p></div>
+          <div class="temperature-description"><p>--</p></div>
+          <div class="location"><p>--</p></div>
+        </div>
+      </section>
+      
+      <section class="card-stats" aria-label="Additional weather details">
+        <div class="stat"><strong id="feelsLike">--</strong><span>Feels</span></div>
+        <div class="stat"><strong id="humidity">--</strong><span>Humidity</span></div>
+        <div class="stat"><strong id="wind">--</strong><span>Wind</span></div>
+      </section>
+
+      <!-- Hourly forecast (horizontal scroll) -->
+      <section class="hourly-forecast" aria-label="Hourly forecast">
+        <h2 class="visually-hidden">Hourly forecast</h2>
+        <div class="hourly-scroll" id="hourlyScroll">
+          <!-- JS will populate hourly items here -->
+          <div class="hour-item skeleton">
+            <div class="hour-time skeleton-line"></div>
+            <div class="hour-icon skeleton-line"></div>
+            <div class="hour-temp skeleton-line"></div>
+          </div>
+          <div class="hour-item skeleton">
+            <div class="hour-time skeleton-line"></div>
+            <div class="hour-icon skeleton-line"></div>
+            <div class="hour-temp skeleton-line"></div>
+          </div>
+          <div class="hour-item skeleton">
+            <div class="hour-time skeleton-line"></div>
+            <div class="hour-icon skeleton-line"></div>
+            <div class="hour-temp skeleton-line"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="card-footer">
+        <button id="locBtn" title="Use my location" aria-label="Use my location">
+          <img src="icons/pin.png" alt="my location">
+        </button>
+      </footer>
+    </div>
+
+    <!-- Separate forecast card -->
+    <div class="forecast-card" role="region" aria-label="7 day forecast and clothing suggestions">
+      <header class="card-header">
+        <h2 style="margin:0; font-size:1rem;">7-Day Forecast</h2>
+      </header>
+      
+      <ul id="dailyList" class="daily-list" style="margin-top: 12px;">
+        <!-- JS will populate daily list items -->
+        <li class="daily-item skeleton">
+          <div class="daily-day skeleton-line"></div>
+          <div class="daily-icon skeleton-line"></div>
+          <div class="daily-temps skeleton-line"></div>
+        </li>
+        <li class="daily-item skeleton">
+          <div class="daily-day skeleton-line"></div>
+          <div class="daily-icon skeleton-line"></div>
+          <div class="daily-temps skeleton-line"></div>
+        </li>
+        <li class="daily-item skeleton">
+          <div class="daily-day skeleton-line"></div>
+          <div class="daily-icon skeleton-line"></div>
+          <div class="daily-temps skeleton-line"></div>
+        </li>
+        <li class="daily-item skeleton">
+          <div class="daily-day skeleton-line"></div>
+          <div class="daily-icon skeleton-line"></div>
+          <div class="daily-temps skeleton-line"></div>
+        </li>
+        <li class="daily-item skeleton">
+          <div class="daily-day skeleton-line"></div>
+          <div class="daily-icon skeleton-line"></div>
+          <div class="daily-temps skeleton-line"></div>
+        </li>
+        <li class="daily-item skeleton">
+          <div class="daily-day skeleton-line"></div>
+          <div class="daily-icon skeleton-line"></div>
+          <div class="daily-temps skeleton-line"></div>
+        </li>
+        <li class="daily-item skeleton">
+          <div class="daily-day skeleton-line"></div>
+          <div class="daily-icon skeleton-line"></div>
+          <div class="daily-temps skeleton-line"></div>
+        </li>
+      </ul>
+
+      <!-- What to Wear section -->
+      <section class="wear-suggestions" aria-label="Clothing suggestions">
+        <h3>What to Wear</h3>
+        <div id="wearItems" class="wear-items">
+          <!-- JS will populate clothing suggestions -->
+          <div class="wear-item skeleton">
+            <div class="skeleton-line"></div>
+          </div>
+          <div class="wear-item skeleton">
+            <div class="skeleton-line"></div>
+          </div>
+          <div class="wear-item skeleton">
+            <div class="skeleton-line"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    </div>
+    
+    <!-- Temperature Chart Section -->
+    <div class="chart-card" role="region" aria-label="Temperature trends">
+      <header class="card-header">
+        <h2 style="margin:0; font-size:1rem;">Temperature Trends - 7 Day Forecast</h2>
+      </header>
+      <div class="chart-container">
+        <canvas id="tempChart"></canvas>
       </div>
-
-
-    <div class="temperature-value">
-      <p>-°<span>C</span></p>
     </div>
-    <div class="temperature-description">
-      <p>-</p>
-    </div>
-    <div class="location">
-      <p>-</p>
-    </div>
-</div>
-  </div>
+  </main>
   <script src="app.js"></script>
 </body>
 </html>
